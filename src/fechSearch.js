@@ -14,8 +14,21 @@ export async function getPhotos(toGet, page = 1) {
       Notiflix.Notify.warning(
         'Sorry, there are no images matching your search query. Please try again.'
       );
+      return
+    };
+  refs.loadMoreEl.style.visibility = 'visible';
+
+
+    if (response.data.totalHits / 40 <= page) {
+      Notiflix.Notify.info(
+        "We're sorry, but you've reached the end of search results."
+      );
+      refs.loadMoreEl.style.visibility = 'hidden';
+      
     }
-    return response;
+
+
+      return response;
   } catch (error) {
     console.error(error);
   }

@@ -1,5 +1,8 @@
 
 export function createMarkup(photos) {
+    if (photos === undefined) {
+        return
+    }
     const markup = photos.data.hits
       .map(photo => {
         return `<div class="photo-card">

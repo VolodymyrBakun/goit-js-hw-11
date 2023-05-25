@@ -10,11 +10,10 @@ let page = 1;
 
 refs.formEl.addEventListener('submit', e => {
   e.preventDefault();
-  refs.loadMoreEl.style.visibility = 'visible';
 
   page = 1;
   const toSearch = refs.formEl.elements.searchQuery.value;
-  getPhotos(toSearch).then(createMarkup).then(renderPhotos);
+  getPhotos(toSearch).then(createMarkup).then(renderPhotos)
 });
 
 refs.loadMoreEl.addEventListener('click', () => {
@@ -22,3 +21,8 @@ refs.loadMoreEl.addEventListener('click', () => {
   const toSearch = refs.formEl.elements.searchQuery.value;
   getPhotos(toSearch, page).then(createMarkup).then(renderMorePhotos);
 });
+
+
+function checkIfEnd(params) {
+  
+}
