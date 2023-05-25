@@ -3,7 +3,7 @@ import axios from 'axios';
 import { refs } from './refs';
 import { getPhotos } from './fechSearch';
 import { createMarkup } from './createMarkup';
-import { renderMorePhotos, renderPhotos } from './RenderPhotos';
+import { renderMorePhotos, renderPhotos } from './renderPhotos'
 
 refs.loadMoreEl.style.visibility = 'hidden';
 let page = 1;
