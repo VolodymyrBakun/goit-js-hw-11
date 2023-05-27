@@ -1,5 +1,4 @@
 import Notiflix from 'notiflix';
-import axios from 'axios';
 import { refs } from './js/refs';
 import { getPhotos } from './js/fechSearch';
 import { createMarkup } from './js/createMarkup';
@@ -10,15 +9,19 @@ let page = 1;
 
 refs.formEl.addEventListener('submit', async e => {
   e.preventDefault();
-
   page = 1;
-  const toSearch = refs.formEl.elements.searchQuery.value.trim();
-  const response = await getPhotos(toSearch);
-  const checkedResponse = await responseCheck(response, page);
-  const markup = await createMarkup(checkedResponse);
-  const render = await renderPhotos(markup);
 
-  // getPhotos(toSearch).then(createMarkup).then(renderPhotos);
+  const toSearch = refs.formEl.elements.searchQuery.value.trim();
+
+  if (toSearch === '') {
+    Notiflix.Notify.info('Please fill in');
+    return;
+  }
+
+  const response = await getPhotos(toSearch);
+  const checkedResponse = responseCheck(response, page);
+  const markup = createMarkup(checkedResponse);
+  const render = renderPhotos(markup);
 });
 
 refs.loadMoreEl.addEventListener('click', async () => {
@@ -27,8 +30,6 @@ refs.loadMoreEl.addEventListener('click', async () => {
 
   const response = await getPhotos(toSearch, page);
   const checkedResponseOnLoadMore = responseCheckOnLoadMore(response, page);
-  const markup = await createMarkup(checkedResponseOnLoadMore);
+  const markup = createMarkup(checkedResponseOnLoadMore);
   const render = renderMorePhotos(markup);
-
-  // getPhotos(toSearch, page).then(createMarkup).then(renderMorePhotos);
 });
